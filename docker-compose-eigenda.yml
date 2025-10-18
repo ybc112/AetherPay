@@ -1,0 +1,109 @@
+version: '3.8'
+
+services:
+  # EigenDA Proxy - 本地测试节点
+  eigenda-proxy:
+    image: ghcr.io/layr-labs/eigenda/proxy:latest
+    container_name: aetherpay-eigenda-proxy
+    ports:
+      - "4242:4242"  # EigenDA Proxy API
+      - "9092:9092"  # Metrics
+    environment:
+      # EigenDA 网络配置 (使用 Holesky 测试网)
+      - EIGENDA_PROXY_MODE=testnet
+      - EIGENDA_PROXY_NETWORK=holesky
+      - EIGENDA_PROXY_PORT=4242
+      - EIGENDA_PROXY_METRICS_PORT=9092
+
+      # 数据可用性配置
+      - EIGENDA_PROXY_CONFIRMATION_DEPTH=0
+      - EIGENDA_PROXY_CONFIRMATION_THRESHOLD=0.67  # 67% 验证者确认
+
+      # 日志配置
+      - EIGENDA_PROXY_LOG_LEVEL=info
+
+      # 性能配置
+      - EIGENDA_PROXY_MAX_BLOB_SIZE=1048576  # 1 MB
+      - EIGENDA_PROXY_BATCH_SIZE=10
+
+    volumes:
+      - eigenda-data:/data
+    networks:
+      - aetherpay-network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:4242/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Oracle 服务 (集成 EigenDA)
+  oracle-eigenda:
+    build:
+      context: .
+      dockerfile: Dockerfile.oracle
+    container_name: aetherpay-oracle-eigenda
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - PRIVATE_KEY=${PRIVATE_KEY}
+      - ORACLE_ADDRESS=${ORACLE_ADDRESS}
+      - EIGENDA_PROXY_URL=http://eigenda-proxy:4242
+      - RPC_URL=${RPC_URL}
+    depends_on:
+      eigenda-proxy:
+        condition: service_healthy
+    networks:
+      - aetherpay-network
+    restart: unless-stopped
+    volumes:
+      - ./models:/app/models:ro
+      - ./services:/app/services:ro
+
+  # Prometheus (监控 EigenDA 和 Oracle)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: aetherpay-prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    networks:
+      - aetherpay-network
+    restart: unless-stopped
+
+  # Grafana (可视化)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: aetherpay-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=aetherpay123
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./monitoring/grafana-dashboards:/etc/grafana/provisioning/dashboards:ro
+    networks:
+      - aetherpay-network
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+volumes:
+  eigenda-data:
+    driver: local
+  prometheus-data:
+    driver: local
+  grafana-data:
+    driver: local
+
+networks:
+  aetherpay-network:
+    driver: bridge

@@ -1,0 +1,37 @@
+{
+  "network": "optimism-sepolia",
+  "deployer": "0x5ce38CfB6698c437d76436DF6d5f30355FDE6a8c",
+  "timestamp": "2025-10-14T22:11:51.033Z",
+  "tokens": {
+    "SOL": {
+      "address": "0x738A919d321b2684f2020Ba05eb754785B59Cfa1",
+      "name": "Mock Solana",
+      "symbol": "SOL",
+      "decimals": 9
+    },
+    "ADA": {
+      "address": "0x2FB8F2b959fEA1fAC5A85d5eFaD9AF194028365d",
+      "name": "Mock Cardano",
+      "symbol": "ADA",
+      "decimals": 6
+    },
+    "BNB": {
+      "address": "0xcF20D332E50cF90cd37bD716480A58a7CFE71C2B",
+      "name": "Mock Binance Coin",
+      "symbol": "BNB",
+      "decimals": 18
+    },
+    "MATIC": {
+      "address": "0x5eC2F154e608Bc6e928a46a8BE8ADB51F912192B",
+      "name": "Mock Polygon",
+      "symbol": "MATIC",
+      "decimals": 18
+    },
+    "AVAX": {
+      "address": "0xe6e9a8ff8B88B81DE680f08dd78B82F93f24A456",
+      "name": "Mock Avalanche",
+      "symbol": "AVAX",
+      "decimals": 18
+    }
+  }
+}

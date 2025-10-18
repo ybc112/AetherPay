@@ -1,0 +1,393 @@
+<svg width="1200" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#4F46E5;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#7C3AED;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0D9488;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#DC2626;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#EA580C;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1F2937;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#374151;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#F8FAFC"/>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#1F2937">
+    AetherPay 技术架构图
+  </text>
+  
+  <!-- Layer 1: Data Sources -->
+  <g id="data-sources">
+    <rect x="50" y="80" width="200" height="120" rx="10" fill="url(#grad3)" opacity="0.9"/>
+    <text x="150" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      数据源层
+    </text>
+    <text x="150" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Binance API
+    </text>
+    <text x="150" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      OKX API
+    </text>
+    <text x="150" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Coinbase API
+    </text>
+    <text x="150" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      CoinGecko API
+    </text>
+    <text x="150" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      1inch API
+    </text>
+  </g>
+  
+  <!-- Layer 2: Data Collection -->
+  <g id="data-collection">
+    <rect x="300" y="80" width="200" height="120" rx="10" fill="url(#grad2)" opacity="0.9"/>
+    <text x="400" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      数据收集层
+    </text>
+    <text x="400" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      DataCollector.py
+    </text>
+    <text x="400" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      价格聚合服务
+    </text>
+    <text x="400" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      异常值过滤
+    </text>
+    <text x="400" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      置信度评估
+    </text>
+    <text x="400" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      实时监控
+    </text>
+  </g>
+  
+  <!-- Layer 3: Storage -->
+  <g id="storage">
+    <rect x="550" y="80" width="200" height="120" rx="10" fill="url(#grad4)" opacity="0.9"/>
+    <text x="650" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      存储层
+    </text>
+    <text x="650" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      SQLite 数据库
+    </text>
+    <text x="650" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Redis 缓存
+    </text>
+    <text x="650" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      历史价格数据
+    </text>
+    <text x="650" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      预言机提交记录
+    </text>
+    <text x="650" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      模型训练数据
+    </text>
+  </g>
+  
+  <!-- Layer 4: AI Models -->
+  <g id="ai-models">
+    <rect x="800" y="80" width="200" height="120" rx="10" fill="url(#grad1)" opacity="0.9"/>
+    <text x="900" y="105" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      AI 模型层
+    </text>
+    <text x="900" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      LightGBM 模型
+    </text>
+    <text x="900" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      价格预测
+    </text>
+    <text x="900" y="155" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      置信度计算
+    </text>
+    <text x="900" y="170" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      路径优化
+    </text>
+    <text x="900" y="185" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      特征工程
+    </text>
+  </g>
+  
+  <!-- Layer 5: Oracle Server -->
+  <g id="oracle-server">
+    <rect x="300" y="250" width="400" height="100" rx="10" fill="url(#grad2)" opacity="0.9"/>
+    <text x="500" y="275" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">
+      预言机服务器 (Oracle Server)
+    </text>
+    <text x="350" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      多源聚合
+    </text>
+    <text x="450" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      共识机制
+    </text>
+    <text x="550" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      签名验证
+    </text>
+    <text x="650" y="295" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      链上提交
+    </text>
+    <text x="350" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Express.js
+    </text>
+    <text x="450" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      WebSocket
+    </text>
+    <text x="550" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      定时任务
+    </text>
+    <text x="650" y="315" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      监控告警
+    </text>
+    <text x="350" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Node.js
+    </text>
+    <text x="450" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Redis
+    </text>
+    <text x="550" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Winston
+    </text>
+    <text x="650" y="335" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Ethers.js
+    </text>
+  </g>
+  
+  <!-- Layer 6: Smart Contracts -->
+  <g id="smart-contracts">
+    <!-- AetherOracleV2 -->
+    <rect x="50" y="400" width="180" height="120" rx="10" fill="url(#grad1)" opacity="0.9"/>
+    <text x="140" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+      AetherOracleV2
+    </text>
+    <text x="140" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      多预言机共识
+    </text>
+    <text x="140" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      声誉系统
+    </text>
+    <text x="140" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      ECDSA 验证
+    </text>
+    <text x="140" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      置信度阈值
+    </text>
+    <text x="140" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      时间窗口共识
+    </text>
+    
+    <!-- FXPool -->
+    <rect x="250" y="400" width="180" height="120" rx="10" fill="url(#grad2)" opacity="0.9"/>
+    <text x="340" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+      FXPool
+    </text>
+    <text x="340" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      多稳定币池
+    </text>
+    <text x="340" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      低滑点交换
+    </text>
+    <text x="340" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      动态费用
+    </text>
+    <text x="340" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      订单拆分
+    </text>
+    <text x="340" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      MEV 保护
+    </text>
+    
+    <!-- PaymentGateway -->
+    <rect x="450" y="400" width="180" height="120" rx="10" fill="url(#grad3)" opacity="0.9"/>
+    <text x="540" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+      PaymentGateway
+    </text>
+    <text x="540" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      商户管理
+    </text>
+    <text x="540" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      订单处理
+    </text>
+    <text x="540" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      多币种支付
+    </text>
+    <text x="540" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      自动结算
+    </text>
+    <text x="540" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      费用分摊
+    </text>
+    
+    <!-- FXRouter -->
+    <rect x="650" y="400" width="180" height="120" rx="10" fill="url(#grad4)" opacity="0.9"/>
+    <text x="740" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+      FXRouter
+    </text>
+    <text x="740" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      智能路由
+    </text>
+    <text x="740" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      路径优化
+    </text>
+    <text x="740" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      多池聚合
+    </text>
+    <text x="740" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      Gas 优化
+    </text>
+    <text x="740" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      MEV 防护
+    </text>
+    
+    <!-- FXPoolFactory -->
+    <rect x="850" y="400" width="180" height="120" rx="10" fill="url(#grad1)" opacity="0.9"/>
+    <text x="940" y="425" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+      FXPoolFactory
+    </text>
+    <text x="940" y="445" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      池工厂
+    </text>
+    <text x="940" y="460" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      动态创建
+    </text>
+    <text x="940" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      LP 代币
+    </text>
+    <text x="940" y="490" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      配置管理
+    </text>
+    <text x="940" y="505" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+      费用设置
+    </text>
+  </g>
+  
+  <!-- Layer 7: Blockchain -->
+  <g id="blockchain">
+    <rect x="300" y="570" width="400" height="80" rx="10" fill="url(#grad4)" opacity="0.9"/>
+    <text x="500" y="595" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="white">
+      区块链网络层
+    </text>
+    <text x="400" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">
+      Optimism L2 主网
+    </text>
+    <text x="500" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">
+      低 Gas 费用
+    </text>
+    <text x="600" y="615" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" fill="white">
+      快速确认
+    </text>
+    <text x="400" y="635" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Optimism Sepolia (测试)
+    </text>
+    <text x="500" y="635" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Base Sepolia (测试)
+    </text>
+    <text x="600" y="635" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      以太坊安全性
+    </text>
+  </g>
+  
+  <!-- Layer 8: Frontend -->
+  <g id="frontend">
+    <rect x="50" y="700" width="300" height="80" rx="10" fill="url(#grad2)" opacity="0.9"/>
+    <text x="200" y="725" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      前端应用层
+    </text>
+    <text x="120" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Next.js 15
+    </text>
+    <text x="200" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      TypeScript
+    </text>
+    <text x="280" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Tailwind CSS
+    </text>
+    <text x="120" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Wagmi/Viem
+    </text>
+    <text x="200" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      RainbowKit
+    </text>
+    <text x="280" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Chart.js
+    </text>
+  </g>
+  
+  <!-- External Services -->
+  <g id="external">
+    <rect x="850" y="700" width="300" height="80" rx="10" fill="url(#grad3)" opacity="0.9"/>
+    <text x="1000" y="725" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">
+      外部服务层
+    </text>
+    <text x="920" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      Supabase
+    </text>
+    <text x="1000" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      IPFS 存储
+    </text>
+    <text x="1080" y="745" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      监控服务
+    </text>
+    <text x="920" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      数据库
+    </text>
+    <text x="1000" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      模型存储
+    </text>
+    <text x="1080" y="765" text-anchor="middle" font-family="Arial, sans-serif" font-size="11" fill="white">
+      告警通知
+    </text>
+  </g>
+  
+  <!-- Data Flow Arrows -->
+  <!-- Data Sources to Collection -->
+  <path d="M 250 140 L 300 140" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Collection to Storage -->
+  <path d="M 500 140 L 550 140" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Storage to AI -->
+  <path d="M 750 140 L 800 140" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- AI to Oracle Server -->
+  <path d="M 900 200 L 600 250" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Storage to Oracle Server -->
+  <path d="M 650 200 L 550 250" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Oracle Server to Smart Contracts -->
+  <path d="M 500 350 L 500 400" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Smart Contracts to Blockchain -->
+  <path d="M 500 520 L 500 570" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Frontend to Smart Contracts -->
+  <path d="M 200 700 L 340 520" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- External to Frontend -->
+  <path d="M 850 740 L 350 740" stroke="#374151" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#374151"/>
+    </marker>
+  </defs>
+  
+  <!-- Legend -->
+  <g id="legend">
+    <rect x="50" y="50" width="1100" height="20" fill="none" stroke="#E5E7EB" stroke-width="1"/>
+    <text x="60" y="65" font-family="Arial, sans-serif" font-size="12" fill="#6B7280">
+      数据流向: 外部数据源 → 数据收集 → 存储缓存 → AI 预测 → 预言机服务 → 智能合约 → 区块链网络 ← 前端应用
+    </text>
+  </g>
+</svg>

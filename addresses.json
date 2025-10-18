@@ -1,0 +1,25 @@
+{
+  "network": "optimism-sepolia",
+  "contracts": {
+    "aetherOracleV2": "0x6a0c9aA2B04BA45Dd348a86Ae3ebE81EE89df106",
+    "publicGoodsFund": "0x0a093d7dA062cD542c554ac181267A90b837a892",
+    "fxPool": "0xA2F1A3378B0D5DC75Ed3ed9A9e89f27706e8bc86",
+    "fxRouter": "0x309F0b5545F70C99c0DFE0dCDe97Bc1970bDb8cC",
+    "fxPoolFactory": "0x775F169d6A1Ccb13FDDEdc99177330F86aA44CEa",
+    "paymentGatewayV2": "0x16e25554Ac0076b33910659Cddff3F1D20735900"
+  },
+  "tokens": {
+    "USDC": "0x07C1E2588295b73bD0b98F2806AbF13E748b6cC3",
+    "USDT": "0xDda8cEa63EDa45777dBd2735A6B4C4c2Dd5f942C"
+  },
+  "explorer": {
+    "aetherOracleV2": "https://sepolia-optimism.etherscan.io/address/0x6a0c9aA2B04BA45Dd348a86Ae3ebE81EE89df106",
+    "publicGoodsFund": "https://sepolia-optimism.etherscan.io/address/0x0a093d7dA062cD542c554ac181267A90b837a892",
+    "fxPool": "https://sepolia-optimism.etherscan.io/address/0xA2F1A3378B0D5DC75Ed3ed9A9e89f27706e8bc86",
+    "fxRouter": "https://sepolia-optimism.etherscan.io/address/0x309F0b5545F70C99c0DFE0dCDe97Bc1970bDb8cC",
+    "fxPoolFactory": "https://sepolia-optimism.etherscan.io/address/0x775F169d6A1Ccb13FDDEdc99177330F86aA44CEa",
+    "paymentGatewayV2": "https://sepolia-optimism.etherscan.io/address/0x16e25554Ac0076b33910659Cddff3F1D20735900"
+  },
+  "lastUpdated": "2025-10-15T22:45:00.000Z",
+  "deployer": "0x5ce38CfB6698c437d76436DF6d5f30355FDE6a8c"
+}

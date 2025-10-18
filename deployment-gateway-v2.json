@@ -1,0 +1,20 @@
+{
+  "network": "optimism-sepolia",
+  "chainId": 11155420,
+  "deployedAt": "2025-10-11T18:23:26.382Z",
+  "deployer": "0x5ce38CfB6698c437d76436DF6d5f30355FDE6a8c",
+  "contracts": {
+    "PaymentGatewayV2": "0xdd0F17F87F60A39ab6004160cc2b503b24a518F8",
+    "FXRouter": "0xC2ab12Baf3735864528F890B809Ffe2f1cf2f8d1",
+    "Treasury": "0x5ce38CfB6698c437d76436DF6d5f30355FDE6a8c",
+    "DonationAddress": "0x5ce38CfB6698c437d76436DF6d5f30355FDE6a8c",
+    "PublicGoodsFund": "0xCc9b8861CB2e42A043376433A73F2f019A7B2e1B",
+    "AetherOracleV2": "0x1D323b80710c1d0c833B920CB7Ace09c49e237d7",
+    "SupportedTokens": {
+      "USDC": "0x07C1E2588295b73bD0b98F2806AbF13E748b6cC3",
+      "USDT": "0xDda8cEa63EDa45777dBd2735A6B4C4c2Dd5f942C"
+    }
+  },
+  "blockNumber": 34202234,
+  "gasUsed": "3785549"
+}
