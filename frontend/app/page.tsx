@@ -19,10 +19,13 @@ export default function Home() {
               <Link href="/orders" className="text-blue-600 hover:text-blue-700 font-medium transition-colors">
                 Orders Market
               </Link>
-              <Link href="#features" className="text-slate-600 hover:text-slate-900 font-medium transition-colors">
-                Features
+              <Link href="/pool" className="text-emerald-600 hover:text-emerald-700 font-medium transition-colors flex items-center gap-1">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                </svg>
+                FX Pool
               </Link>
-              <Link href="/analytics" className="text-purple-600 hover:text-purple-700 font-medium transition-colors">
+              <Link href="/analytics" className="text-slate-600 hover:text-slate-900 font-medium transition-colors">
                 Analytics
               </Link>
               <Link href="/public-goods" className="text-slate-600 hover:text-slate-900 font-medium transition-colors">
@@ -149,11 +152,11 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
                 </svg>
               </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Smart FX Router</h3>
+              <h3 className="text-xl font-bold text-slate-900 mb-3">FX Liquidity Pool</h3>
               <p className="text-slate-600 mb-4 leading-relaxed">
-                Intelligent routing across multiple liquidity pools. Automatic order splitting and MEV protection for optimal execution.
+                Decentralized exchange for stablecoins and crypto. Provide liquidity to earn fees or swap tokens with MEV protection.
               </p>
-              <div className="text-sm text-emerald-600 font-semibold">60% lower slippage • Gas optimized</div>
+              <div className="text-sm text-emerald-600 font-semibold">5-18% APY • Instant swaps</div>
             </div>
 
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-slate-200 hover:shadow-xl transition-all group">

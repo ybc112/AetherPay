@@ -5,6 +5,7 @@ import { useAccount, useReadContract, useWriteContract, useWaitForTransactionRec
 import { CONTRACTS, PAYMENT_GATEWAY_ABI } from '@/lib/contracts';
 import Link from 'next/link';
 import DashboardLayout from '@/components/DashboardLayout';
+import OrderDetailsModal from '@/components/OrderDetailsModal';
 import toast from 'react-hot-toast';
 
 type OrderStatus = 0 | 1 | 2 | 3 | 4 | 5; // PENDING | PAID | PROCESSING | COMPLETED | CANCELLED | EXPIRED
@@ -22,6 +23,7 @@ interface OrderView {
   status: OrderStatus;
   createdAt: bigint;
   paidAt: bigint;
+  metadataURI: string;
 }
 
 const STATUS_CONFIG = {
@@ -39,9 +41,17 @@ const isOrderExpired = (order: OrderView): boolean => {
   return order.status === 0 && Date.now() / 1000 > expiryTime;
 };
 
+// 🆕 检查订单是否部分支付
+const isPartiallyPaid = (order: OrderView): boolean => {
+  return Number(order.paidAmount) > 0 && Number(order.paidAmount) < Number(order.orderAmount);
+};
+
 const TOKEN_SYMBOLS: Record<string, string> = {
   [CONTRACTS.MOCK_USDC.toLowerCase()]: 'USDC',
   [CONTRACTS.MOCK_USDT.toLowerCase()]: 'USDT',
+  [CONTRACTS.MOCK_DAI.toLowerCase()]: 'DAI',
+  [CONTRACTS.MOCK_WETH.toLowerCase()]: 'WETH',
+  [CONTRACTS.MOCK_WBTC.toLowerCase()]: 'WBTC',
 };
 
 export default function OrdersPage() {
@@ -50,6 +60,13 @@ export default function OrdersPage() {
   const [currentPage, setCurrentPage] = useState(0);
   const [ordersPerPage] = useState(10);
   const [searchQuery, setSearchQuery] = useState('');
+
+  // 🆕 批量操作状态
+  const [selectedOrders, setSelectedOrders] = useState<Set<string>>(new Set());
+  const [showBatchActions, setShowBatchActions] = useState(false);
+
+  // 🆕 订单详情弹窗
+  const [selectedOrderForDetails, setSelectedOrderForDetails] = useState<string | null>(null);
 
   // 获取订单总数
   const { data: totalOrders, refetch: refetchCount } = useReadContract({
@@ -352,6 +369,49 @@ Are you sure you want to settle this order?
           </div>
         )}
 
+        {/* Batch Actions Bar - Show when orders are selected */}
+        {selectedOrders.size > 0 && (
+          <div className="mb-6 bg-indigo-600 rounded-xl shadow-lg p-4 text-white">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <span className="font-semibold">
+                  {selectedOrders.size} order{selectedOrders.size > 1 ? 's' : ''} selected
+                </span>
+                <button
+                  onClick={() => setSelectedOrders(new Set())}
+                  className="text-indigo-200 hover:text-white transition-colors"
+                >
+                  Clear selection
+                </button>
+              </div>
+              <div className="flex gap-3">
+                <button
+                  onClick={() => {
+                    if (confirm(`Cancel ${selectedOrders.size} selected orders?`)) {
+                      selectedOrders.forEach(orderId => handleCancelOrder(orderId));
+                      setSelectedOrders(new Set());
+                    }
+                  }}
+                  className="bg-white text-red-600 px-4 py-2 rounded-lg font-semibold hover:bg-red-50 transition-colors"
+                >
+                  Cancel Selected
+                </button>
+                <button
+                  onClick={() => {
+                    if (confirm(`Refund ${selectedOrders.size} selected orders?`)) {
+                      selectedOrders.forEach(orderId => handleRefundOrder(orderId));
+                      setSelectedOrders(new Set());
+                    }
+                  }}
+                  className="bg-white text-orange-600 px-4 py-2 rounded-lg font-semibold hover:bg-orange-50 transition-colors"
+                >
+                  Refund Selected
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
+
         {/* Filters & Search */}
         <div className="bg-white rounded-xl shadow-md p-6 mb-6">
           <div className="grid md:grid-cols-3 gap-4">
@@ -438,6 +498,20 @@ Are you sure you want to settle this order?
                 <table className="w-full">
                   <thead className="bg-gray-50 border-b border-gray-200">
                     <tr>
+                      <th className="px-6 py-3 text-left">
+                        <input
+                          type="checkbox"
+                          className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                          checked={filteredOrders.length > 0 && filteredOrders.every(order => selectedOrders.has(order.orderId))}
+                          onChange={(e) => {
+                            if (e.target.checked) {
+                              setSelectedOrders(new Set(filteredOrders.map(o => o.orderId)));
+                            } else {
+                              setSelectedOrders(new Set());
+                            }
+                          }}
+                        />
+                      </th>
                       <th className="px-6 py-3 text-left text-xs font-semibold text-gray-700 uppercase tracking-wider">
                         Order ID
                       </th>
@@ -461,10 +535,29 @@ Are you sure you want to settle this order?
                   <tbody className="divide-y divide-gray-200">
                     {filteredOrders.map((order) => (
                       <tr key={order.orderId} className="hover:bg-gray-50 transition-colors">
+                        <td className="px-6 py-4">
+                          <input
+                            type="checkbox"
+                            className="rounded border-gray-300 text-emerald-600 focus:ring-emerald-500"
+                            checked={selectedOrders.has(order.orderId)}
+                            onChange={(e) => {
+                              const newSelected = new Set(selectedOrders);
+                              if (e.target.checked) {
+                                newSelected.add(order.orderId);
+                              } else {
+                                newSelected.delete(order.orderId);
+                              }
+                              setSelectedOrders(newSelected);
+                            }}
+                          />
+                        </td>
                         <td className="px-6 py-4 whitespace-nowrap">
                           <div className="flex items-center">
                             <div>
-                              <div className="text-sm font-medium text-gray-900 font-mono">
+                              <div
+                                className="text-sm font-medium text-gray-900 font-mono cursor-pointer hover:text-emerald-600 transition-colors"
+                                onClick={() => setSelectedOrderForDetails(order.orderIdString)}
+                              >
                                 {order.orderIdString.slice(0, 12)}...
                               </div>
                               <div className="text-xs text-gray-500">
@@ -482,17 +575,29 @@ Are you sure you want to settle this order?
                           {order.paidAmount > 0 && (
                             <div className="text-xs text-gray-500">
                               Paid: ${(Number(order.paidAmount) / 1e6).toFixed(2)}
+                              {isPartiallyPaid(order) && (
+                                <span className="ml-1 text-orange-600 font-semibold">
+                                  ({((Number(order.paidAmount) / Number(order.orderAmount)) * 100).toFixed(0)}%)
+                                </span>
+                              )}
                             </div>
                           )}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap">
-                          <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
-                            isOrderExpired(order)
-                              ? 'bg-gray-100 text-gray-800 border-gray-300'
-                              : STATUS_CONFIG[order.status].color
-                          } ${STATUS_CONFIG[order.status].borderColor} border`}>
-                            {isOrderExpired(order) ? '⌛ Expired' : STATUS_CONFIG[order.status].label}
-                          </span>
+                          <div className="flex items-center gap-2">
+                            <span className={`px-3 py-1 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                              isOrderExpired(order)
+                                ? 'bg-gray-100 text-gray-800 border-gray-300'
+                                : STATUS_CONFIG[order.status].color
+                            } ${STATUS_CONFIG[order.status].borderColor} border`}>
+                              {isOrderExpired(order) ? '⌛ Expired' : STATUS_CONFIG[order.status].label}
+                            </span>
+                            {isPartiallyPaid(order) && (
+                              <span className="px-2 py-1 inline-flex text-xs font-semibold rounded-full bg-orange-100 text-orange-800 border border-orange-300">
+                                💸 Partial
+                              </span>
+                            )}
+                          </div>
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                           <div>Pay: {TOKEN_SYMBOLS[order.paymentToken.toLowerCase()] || 'Unknown'}</div>
@@ -502,11 +607,17 @@ Are you sure you want to settle this order?
                           {new Date(Number(order.createdAt) * 1000).toLocaleDateString()}
                         </td>
                         <td className="px-6 py-4 whitespace-nowrap text-sm font-medium space-x-2">
+                          <button
+                            onClick={() => setSelectedOrderForDetails(order.orderIdString)}
+                            className="text-emerald-600 hover:text-emerald-900 font-semibold"
+                          >
+                            Details
+                          </button>
                           <Link
                             href={`/pay/${order.orderIdString}`}
-                            className="text-emerald-600 hover:text-emerald-900"
+                            className="text-blue-600 hover:text-blue-900"
                           >
-                            View
+                            Pay Link
                           </Link>
                           {order.status === 0 && !isOrderExpired(order) && (
                             <button
@@ -609,6 +720,19 @@ Are you sure you want to settle this order?
           </div>
         </div>
       </div>
+
+      {/* Order Details Modal */}
+      {selectedOrderForDetails && (
+        <OrderDetailsModal
+          orderId={selectedOrderForDetails}
+          isOpen={!!selectedOrderForDetails}
+          onClose={() => setSelectedOrderForDetails(null)}
+          onRefresh={() => {
+            refetchOrders();
+            refetchCount();
+          }}
+        />
+      )}
     </DashboardLayout>
   );
 }
