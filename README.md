@@ -378,6 +378,8 @@ This software is experimental and provided "as is" without warranty of any kind.
 
 Made with ❤️ by the AetherPay Team
 
+> Docs last updated: 2025-10-20
+
 [Website](#) • [Docs](#) • [Twitter](#) • [Discord](#)
 
 </div>
