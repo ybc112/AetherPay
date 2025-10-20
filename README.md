@@ -490,7 +490,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - **Email**: ybc2003121388@gmail.com
 - **可演示时段**: 工作日 10:00-22:00 CST / 周末随时
 - **Issues**: [GitHub Issues](https://github.com/ybc112/aether-oracle/issues)
-- **Demo Video**: [Bilibili](https://www.bilibili.com/video/BV1XHsuzxEHZ/?vd_source=cb777f4e24346a191c37f472a4482d522)
+- **Demo Video**: [Bilibili](https://www.bilibili.com/video/BV16PW2zzEyh/?vd_source=cb777f4e24346a191c37f472a4482d52)
 
 ---
 
@@ -509,3 +509,4 @@ Made with ❤️ by the AetherPay Team for ETHShanghai 2025
 🏆 **Solving $40B Annual Cross-Border Payment Loss with AI** 🏆
 
 </div>
+
