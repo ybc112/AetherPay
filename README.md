@@ -504,10 +504,11 @@ This software is experimental and provided "as is" without warranty of any kind.
 
 Made with ❤️ by the AetherPay Team for ETHShanghai 2025
 
+  Docs last updated: 2025-10-20
+  
 **[Website](https://aetherpay.vercel.app)** • **[Demo Video](https://www.bilibili.com/video/BV1XHsuzxEHZ)** • **[Twitter](https://twitter.com/YBCYBC2003)** • **[Deck](https://aetherpay-deck.vercel.app)**
 
 🏆 **Solving $40B Annual Cross-Border Payment Loss with AI** 🏆
 
 </div>
-
 
