@@ -18,7 +18,7 @@
 
 ## 🎥 Demo Video
 
-**📺 3 分钟项目演示**: [点击观看完整演示](https://www.bilibili.com/video/BV1XHsuzxEHZ/?vd_source=cb777f4e24346a191c37f472a4482d522)
+**📺 3 分钟项目演示**: [点击观看完整演示](https://www.bilibili.com/video/BV16PW2zzEyh/?vd_source=cb777f4e24346a191c37f472a4482d52)
 
 **视频内容**:
 - ✅ 商家创建跨币种订单（USDT → USDC）
@@ -509,4 +509,5 @@ Made with ❤️ by the AetherPay Team for ETHShanghai 2025
 🏆 **Solving $40B Annual Cross-Border Payment Loss with AI** 🏆
 
 </div>
+
 
